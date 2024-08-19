@@ -64,9 +64,27 @@
         ctx.fillRect(x+7*a+2*b, y+2*a-b, 0.3*a, 0.3*a);
 
 
+         // Dust Bunny
+        function DustBunny(ctx, centerX, centerY, maxRadius, numCircles) {
+            for (let i = 0; i < numCircles; i++) {
+                // Randomly determine position and size for each circle
+                let radius = Math.random() * (maxRadius / 2);
+                let offsetX = (Math.random() - 0.5) * maxRadius;
+                let offsetY = (Math.random() - 0.5) * maxRadius;
+
+                ctx.beginPath();
+                ctx.arc(centerX + offsetX, centerY + offsetY, radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'rgba(105, 105, 105, 0.8)'; // Gray with some transparency
+                ctx.fill();
+            }
+        }
+
+        // Draw the dust bunny near the bottom-left corner of the room
+        DustBunny(ctx, x + 1.5 * a, y + 3.5 * a, 30, 10); 
+
         
     </script>
-    <p>qqqqq</p>
+    <p>zzzzzzzzzzzzzzzzzz</p>
     <br>
     <a href="index.html">
     <button class="first-button">back</button>
