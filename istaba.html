@@ -19,72 +19,112 @@
         var a = 70;
         var b = 5;
 
-        // Draw a rectangle (room)
-        ctx.fillStyle = 'Tan';
-        ctx.fillRect(x, y, 10*a, 4*a);
+        var dustBunnies = [
+            {x: x + 1.5 * a, y: y + 3.5 * a, radius: 30, exists: true},
+            {x: x + 6.5 * a, y: y + 3.5 * a, radius: 25, exists: true},
+            {x: x + 4 * a, y: y + 1.5 * a, radius: 20, exists: true},
+        ];
+        
+//=================================================================================================
+        function room() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+            
+            // Draw a rectangle (room)
+            ctx.fillStyle = 'Tan';
+            ctx.fillRect(x, y, 10*a, 4*a);
 
-        // palodze
-        ctx.fillStyle = 'lightgray';
-        ctx.fillRect(x, y, 0.5*a, 4*a); 
+            // palodze
+            ctx.fillStyle = 'lightgray';
+            ctx.fillRect(x, y, 0.5*a, 4*a); 
 
-        // gulta
-        ctx.fillStyle = 'white';
-        ctx.fillRect(x+0.5*a, y+2*a, 4.5*a, 2*a);
+            // gulta
+            ctx.fillStyle = 'white';
+            ctx.fillRect(x+0.5*a, y+2*a, 4.5*a, 2*a);
 
-        // dzeltenais galds
-        ctx.fillStyle = 'yellow';
-        ctx.fillRect(x+0.5*a, y, a, 2*a);
+            // dzeltenais galds
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(x+0.5*a, y, a, 2*a);
 
-        // klavieres
-        ctx.fillStyle = 'black';
-        ctx.fillRect(x+1.5*a, y, 1.5*a, 0.4*a);
+            // klavieres
+            ctx.fillStyle = 'black';
+            ctx.fillRect(x+1.5*a, y, 1.5*a, 0.4*a);
 
-        // galds 1
-        ctx.fillStyle = 'lightgray';
-        ctx.fillRect(x+3*a, y, 2.2*a, a);
+            // galds 1
+            ctx.fillStyle = 'lightgray';
+            ctx.fillRect(x+3*a, y, 2.2*a, a);
 
-        // galds 2
-        ctx.fillStyle = 'lightgreen';
-        ctx.fillRect(x+5.2*a, y, 2.2*a, a);
+            // galds 2
+            ctx.fillStyle = 'lightgreen';
+            ctx.fillRect(x+5.2*a, y, 2.2*a, a);
 
-        // skapis
-        ctx.fillStyle = 'lightblue';
-        ctx.fillRect(x+5*a, y+3*a, 3*a, a);
+            // skapis
+            ctx.fillStyle = 'lightblue';
+            ctx.fillRect(x+5*a, y+3*a, 3*a, a);
 
-        // skapis vecāku
-        ctx.fillStyle = 'SaddleBrown';
-        ctx.fillRect(x+9*a, y+a, a, 2*a);
+            // skapis vecāku
+            ctx.fillStyle = 'SaddleBrown';
+            ctx.fillRect(x+9*a, y+a, a, 2*a);
 
-        // drēbes
-        ctx.fillStyle = 'red';
-        ctx.fillRect(x+7*a, y+2*a, 0.3*a, 0.3*a);
-        ctx.fillStyle = 'yellow';
-        ctx.fillRect(x+7*a+b, y+2*a+b, 0.3*a, 0.3*a);
-        ctx.fillStyle = 'white';
-        ctx.fillRect(x+7*a+2*b, y+2*a-b, 0.3*a, 0.3*a);
-
-
+            // drēbes
+            ctx.fillStyle = 'red';
+            ctx.fillRect(x+7*a, y+2*a, 0.3*a, 0.3*a);
+            ctx.fillStyle = 'yellow';
+            ctx.fillRect(x+7*a+b, y+2*a+b, 0.3*a, 0.3*a);
+            ctx.fillStyle = 'white';
+            ctx.fillRect(x+7*a+2*b, y+2*a-b, 0.3*a, 0.3*a);
+        }
+        
+// ==================================================================================================================================================================================================================
          // Dust Bunny
-        function DustBunny(ctx, centerX, centerY, maxRadius, numCircles) {
+        function draw_bunny(centerX, centerY, maxRadius, numCircles) {
             for (let i = 0; i < numCircles; i++) {
                 // Randomly determine position and size for each circle
                 let radius = Math.random() * (maxRadius / 2);
                 let offsetX = (Math.random() - 0.5) * maxRadius;
                 let offsetY = (Math.random() - 0.5) * maxRadius;
-
                 ctx.beginPath();
                 ctx.arc(centerX + offsetX, centerY + offsetY, radius, 0, Math.PI * 2, false);
                 ctx.fillStyle = 'rgba(105, 105, 105, 0.8)'; // Gray with some transparency
                 ctx.fill();
             }
         }
+//=============================================================================================================
+        // Draw the dust bunnies
+        function draw_all_bunnies() {
+            dustBunnies.forEach(function(bunny) {
+                if (bunny.exists) {
+                    draw_bunny(bunny.x, bunny.y, bunny.radius, 10);
+                }
+            });
+        }
+//==========================================================================================================================
+        function checkBunnyClick(event) {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = event.clientX - rect.left;
+            var mouseY = event.clientY - rect.top;
 
-        // Draw the dust bunny near the bottom-left corner of the room
-        DustBunny(ctx, x + 1.5 * a, y + 3.5 * a, 30, 10); 
+            // Check each bunny
+            dustBunnies.forEach(function(bunny) {
+                if (bunny.exists) {
+                    var distance = Math.sqrt((mouseX - bunny.x) ** 2 + (mouseY - bunny.y) ** 2);
+                    if (distance < bunny.radius) {
+                        bunny.exists = false; // Make the bunny disappear
+                    }
+                }
+            });
+
+            room();
+            draw_all_bunnies();
+        }
+        canvas.addEventListener('click', checkBunnyClick);
+//===========================================================================
+      //sākums 
+        room();
+        draw_all_bunnies();
 
         
     </script>
-    <p>zzzzzzzzzzzzzzzzzz</p>
+    <p>ir pārmaiņas</p>
     <br>
     <a href="index.html">
     <button class="first-button">back</button>
