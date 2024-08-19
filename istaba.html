@@ -14,14 +14,16 @@
     <script>
         var canvas = document.getElementById('roomCanvas');
         var ctx = canvas.getContext('2d');
+        var x = 100;
+        var y = 100;
 
         // Draw a rectangle (room)
         ctx.fillStyle = 'lightgrey';
-        ctx.fillRect(50, 50, 700, 500);
+        ctx.fillRect(x, y, 700, 500);
 
         // Draw some furniture
         ctx.fillStyle = 'brown';
-        ctx.fillRect(150, 100, 200, 150); // A table
+        ctx.fillRect(x, y, 200, 150); // A table
     </script>
     <br>
     <a href="index.html">
