@@ -1,0 +1,7 @@
+/*  background and font for the entire page */
+body {
+  background-color: lightpink;
+  font-family: "Times New Roman", Times, serif;
+  margin: 0;
+  padding: 0;
+}
