@@ -17,3 +17,14 @@ body {
   cursor: pointer;
   border-radius: 8px;
 }
+
+.canvas-container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2cm; /* 2 cm gap between the canvases */
+  margin-top: 20px;
+}
+
+canvas {
+  border: none; /* Remove the canvas border */
+}
