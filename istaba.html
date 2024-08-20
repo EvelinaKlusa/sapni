@@ -138,48 +138,13 @@
         function drawDog() {
             dogCtx.clearRect(0, 0, dogCanvas.width, dogCanvas.height); // Clear the canvas
 
-            // Draw dog's body
-            dogCtx.fillStyle = 'brown';
-            dogCtx.fillRect(100, 200, 150, 100);
-
-            // Draw dog's head
-            dogCtx.fillStyle = 'brown';
-            dogCtx.beginPath();
-            dogCtx.arc(80, 250, 50, 0, Math.PI * 2, true);
-            dogCtx.fill();
-
-            // Draw dog's eyes
-            dogCtx.fillStyle = 'white';
-            dogCtx.beginPath();
-            dogCtx.arc(65, 230, 10, 0, Math.PI * 2, true);
-            dogCtx.fill();
-            dogCtx.beginPath();
-            dogCtx.arc(95, 230, 10, 0, Math.PI * 2, true);
-            dogCtx.fill();
-
-            // Draw dog's pupils
-            dogCtx.fillStyle = 'black';
-            dogCtx.beginPath();
-            dogCtx.arc(65, 230, 5, 0, Math.PI * 2, true);
-            dogCtx.fill();
-            dogCtx.beginPath();
-            dogCtx.arc(95, 230, 5, 0, Math.PI * 2, true);
-            dogCtx.fill();
-
-            // Draw dog's nose
-            dogCtx.fillStyle = 'black';
-            dogCtx.beginPath();
-            dogCtx.arc(80, 270, 10, 0, Math.PI, false);
-            dogCtx.fill();
-
-            // Draw dog's tail
-            dogCtx.strokeStyle = 'brown';
-            dogCtx.lineWidth = 10;
-            dogCtx.beginPath();
-            dogCtx.moveTo(250, 250);
-            dogCtx.lineTo(300, 200);
-            dogCtx.stroke();
-        }
+            var x = 100;
+            var y = 100;
+            var a = 50;
+            
+            // ķermenis
+            dogCtx.fillStyle = 'hex';
+            dogCtx.fillRect(x, y, 4*a, 4*a);
 
         drawDog();
     </script>
