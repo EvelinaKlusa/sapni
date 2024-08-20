@@ -18,6 +18,11 @@ body {
   border-radius: 8px;
 }
 
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .canvas-container {
   display: flex;
   justify-content: flex-start;
