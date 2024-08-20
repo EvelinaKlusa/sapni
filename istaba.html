@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Istaba</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .canvas-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
     <h1 style="text-align: center;">Istaba</h1>
-    <br>
-    <canvas id="roomCanvas" width="800" height="500"></canvas>
+    <div class="canvas-container">
+        <!-- Room Canvas -->
+        <canvas id="roomCanvas" width="800" height="500"></canvas>
+
+        <!-- Dog Canvas -->
+        <canvas id="dogCanvas" width="400" height="500"></canvas>
+    </div>
 
     <script>
         var canvas = document.getElementById('roomCanvas');
@@ -20,69 +35,68 @@
         var b = 5;
 
         var dustBunnies = [
-            {x: x + 0.25 * a, y: y + 2 * a, radius: 10, exists: true}, //palodze
-            {x: x + 3 * a, y: y + 3 * a, radius: 40, exists: true}, //gulta
-            {x: x + a, y: y + a, radius: 20, exists: true}, //dz galds
-            {x: x + 2*a, y: y + 0.2*a, radius: 16, exists: true}, //klavieres
-            {x: x + 4 * a, y: y + 0.54 * a, radius: 34, exists: true}, //galds1
-            {x: x + 6 * a, y: y + 0.46 * a, radius: 36, exists: true}, //galds2
-            {x: x + 6.2 * a, y: y + 3.5 * a, radius: 40, exists: true}, //skapis
-            {x: x + 9.5 * a, y: y + 2 * a, radius: 32, exists: true}, //vecāku skapis
-            {x: x + 7 * a, y: y + 2 * a, radius: 30, exists: true}, //drēbes
-            {x: x + 3 * a, y: y + 1.5 * a, radius: 30, exists: true}, //grīda
+            {x: x + 0.25 * a, y: y + 2 * a, radius: 10, exists: true}, // palodze
+            {x: x + 3 * a, y: y + 3 * a, radius: 40, exists: true}, // gulta
+            {x: x + a, y: y + a, radius: 20, exists: true}, // dz galds
+            {x: x + 2 * a, y: y + 0.2 * a, radius: 16, exists: true}, // klavieres
+            {x: x + 4 * a, y: y + 0.54 * a, radius: 34, exists: true}, // galds1
+            {x: x + 6 * a, y: y + 0.46 * a, radius: 36, exists: true}, // galds2
+            {x: x + 6.2 * a, y: y + 3.5 * a, radius: 40, exists: true}, // skapis
+            {x: x + 9.5 * a, y: y + 2 * a, radius: 32, exists: true}, // vecāku skapis
+            {x: x + 7 * a, y: y + 2 * a, radius: 30, exists: true}, // drēbes
+            {x: x + 3 * a, y: y + 1.5 * a, radius: 30, exists: true}, // grīda
         ];
-        
-//=================================================================================================
+
+        // Room Drawing
         function room() {
             ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-            
+
             // Draw a rectangle (room)
             ctx.fillStyle = 'Tan';
-            ctx.fillRect(x, y, 10*a, 4*a);
+            ctx.fillRect(x, y, 10 * a, 4 * a);
 
             // palodze
             ctx.fillStyle = 'lightgray';
-            ctx.fillRect(x, y, 0.5*a, 4*a); 
+            ctx.fillRect(x, y, 0.5 * a, 4 * a);
 
             // gulta
             ctx.fillStyle = 'white';
-            ctx.fillRect(x+0.5*a, y+2*a, 4.5*a, 2*a);
+            ctx.fillRect(x + 0.5 * a, y + 2 * a, 4.5 * a, 2 * a);
 
             // dzeltenais galds
             ctx.fillStyle = 'yellow';
-            ctx.fillRect(x+0.5*a, y, a, 2*a);
+            ctx.fillRect(x + 0.5 * a, y, a, 2 * a);
 
             // klavieres
             ctx.fillStyle = 'black';
-            ctx.fillRect(x+1.5*a, y, 1.5*a, 0.4*a);
+            ctx.fillRect(x + 1.5 * a, y, 1.5 * a, 0.4 * a);
 
             // galds 1
             ctx.fillStyle = 'lightgray';
-            ctx.fillRect(x+3*a, y, 2.2*a, a);
+            ctx.fillRect(x + 3 * a, y, 2.2 * a, a);
 
             // galds 2
             ctx.fillStyle = 'lightgreen';
-            ctx.fillRect(x+5.2*a, y, 2.2*a, a);
+            ctx.fillRect(x + 5.2 * a, y, 2.2 * a, a);
 
             // skapis
             ctx.fillStyle = 'lightblue';
-            ctx.fillRect(x+5*a, y+3*a, 3*a, a);
+            ctx.fillRect(x + 5 * a, y + 3 * a, 3 * a, a);
 
             // skapis vecāku
             ctx.fillStyle = 'SaddleBrown';
-            ctx.fillRect(x+9*a, y+a, a, 2*a);
+            ctx.fillRect(x + 9 * a, y + a, a, 2 * a);
 
             // drēbes
             ctx.fillStyle = 'red';
-            ctx.fillRect(x+7*a, y+2*a, 0.3*a, 0.3*a);
+            ctx.fillRect(x + 7 * a, y + 2 * a, 0.3 * a, 0.3 * a);
             ctx.fillStyle = 'yellow';
-            ctx.fillRect(x+7*a+b, y+2*a+b, 0.3*a, 0.3*a);
+            ctx.fillRect(x + 7 * a + b, y + 2 * a + b, 0.3 * a, 0.3 * a);
             ctx.fillStyle = 'white';
-            ctx.fillRect(x+7*a+2*b, y+2*a-b, 0.3*a, 0.3*a);
+            ctx.fillRect(x + 7 * a + 2 * b, y + 2 * a - b, 0.3 * a, 0.3 * a);
         }
-        
-// ==================================================================================================================================================================================================================
-         // Dust Bunny
+
+        // Dust Bunny
         function draw_bunny(centerX, centerY, maxRadius, numCircles) {
             for (let i = 0; i < numCircles; i++) {
                 // Randomly determine position and size for each circle
@@ -95,7 +109,7 @@
                 ctx.fill();
             }
         }
-//=============================================================================================================
+
         // Draw the dust bunnies
         function draw_all_bunnies() {
             dustBunnies.forEach(function(bunny) {
@@ -104,7 +118,7 @@
                 }
             });
         }
-//==========================================================================================================================
+
         function checkBunnyClick(event) {
             var rect = canvas.getBoundingClientRect();
             var mouseX = event.clientX - rect.left;
@@ -123,12 +137,14 @@
             room();
             draw_all_bunnies();
         }
+
         canvas.addEventListener('click', checkBunnyClick);
-//===========================================================================
-      //sākums 
+
+        // Initial drawing
         room();
         draw_all_bunnies();
 
+        // Dog Drawing on the second canvas
         var dogCanvas = document.getElementById('dogCanvas');
         var dogCtx = dogCanvas.getContext('2d');
 
@@ -179,14 +195,11 @@
         }
 
         drawDog();
-
-
-        
     </script>
     <br>
     <a href="index.html">
     <button class="first-button">back</button>
   </a>
-    <p>kkjkjkjjk</p>
+    <p>aaaaaaaaaaaaaaaaaa</p>
 </body>
 </html>
